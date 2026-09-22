@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#160b2b">
+<title>Panguuu Mirror 🪞</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#fff;background:radial-gradient(circle at 50% 15%,#4b2678 0,#21113d 38%,#0d0718 100%);
+  display:flex;justify-content:center;align-items:center;padding:20px;
+}
+.wrap{width:min(520px,100%);text-align:center}
+h1{font-size:28px;margin:0 0 6px}.sub{opacity:.8;margin:0 0 18px}
+.screen{display:none}.screen.active{display:block}
+.letter{
+  text-align:left;max-height:72vh;overflow:auto;padding:22px 19px;border-radius:24px;
+  background:rgba(17,8,31,.82);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.16);box-shadow:0 20px 60px rgba(0,0,0,.35);
+  line-height:1.55;font-size:15.5px;
+}
+.letter p{margin:0 0 14px}.letter p:last-child{margin-bottom:0}
+.btn{
+  border:0;border-radius:999px;padding:14px 22px;margin-top:18px;
+  background:#fff;color:#251034;font-weight:800;font-size:16px;cursor:pointer;
+}
+.hint{font-size:13px;opacity:.65;margin-top:12px}
+.mirror{
+  position:relative;width:100%;aspect-ratio:3/4;border-radius:30px;overflow:hidden;
+  border:3px solid rgba(255,255,255,.35);background:#08060d;
+  box-shadow:0 20px 60px rgba(0,0,0,.45),0 0 35px rgba(180,110,255,.25);
+}
+video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block;background:#111}
+.frame{position:absolute;inset:10px;border:1px solid rgba(255,255,255,.35);border-radius:23px;pointer-events:none}
+.verdict-intro{font-size:1.05rem;line-height:1.75;margin-bottom:14px}.verdict-divider{height:1px;background:rgba(255,255,255,.16);margin:12px 0 18px}.verdict{
+  margin-top:18px;padding:20px;border-radius:22px;background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.15);opacity:0;transform:scale(.96);transition:.7s ease
+}
+.verdict.show{opacity:1;transform:scale(1)}
+.verdict b{display:block;font-size:22px;margin:8px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="screen active" id="messageScreen">
+    <h1>💌 A message for Panguuuu</h1>
+    <p class="sub">First… read this properly. 😌</p>
+    <div class="letter">
+      <p>Hiiiii Divyaaaaaaa 😁😁</p>
+      <p>Enaku therthu nee una pathi insecure aa feel pandra nu.. butt i wish u could see yourself the way i see youuu</p>
+      <p>Nijamaaa panguuu vantuu alaguuu than.. sometimes paka alagaa iruka mari sometimes ilatha mari nu nee ninaikra apdi ella illa.. epomee panguu romba azhaguu thaaa.. 🤗 pimples varathu naala or mudi kottudhu ndrathunala pilla alagaa ilama la illa seriyaa.. athela romba yosikatha... pimples la poirum and mudi kotrathella valanthurum athu thin aana mari irukarthellam namma overthinking tha.. onnum ila apdiye irunthalum athu enanu paathu deal paniklm.. seri agirumm apdi irukarthunala panguu alagu ila la kidaiyathuuu</p>
+      <p>appearance face nu mattum ilama panguu character aa rombaa azhagu... yarachuu kitta vara mudiyumaaa unakuu?😤 yarume illa</p>
+      <p>Nee siricha evlo natural aa cute aa irukum thryumaaa... athukum insecure aa la feel panathingaaa pillaiyee.. nee enta jolly ya pesrathu ellam soldrathuu ella chinna chinna vishayam elameyy panguu vera levell cuteee dhaa 😍 epome sirichiteyy iruu...</p>
+      <p>Unaku epo la intha mari oru Mirror aa pakumpothella unak oru mari insecure aa feel aguthooo</p>
+      <p>Un venna panguu best friend naa thana ￼ remember that un panguu kannuku nee romba azhagaa therira nu and also enku puriyala Epdi pillai avlo alagaa irunthu insecure aa feel pandra nu</p>
+      <p>Andd intha mirror aa nyaabagathuku kondu vaaa 😁</p>
+      <p>Sooo insecure aa feel panathellam pothum... ipo poi mirror la un azhagana face aa paruuungall pillaiyeee 🥰</p>
+    </div>
+    <button class="btn" id="toMirror">Okay… now see yourself 🪞</button>
+  </section>
+
+  <section class="screen" id="mirrorScreen">
+    <h1>🪞 Panguuu Mirror</h1>
+    <p class="sub">Now… look properly, Panguuuu 😌</p>
+    <div class="mirror">
+      <video id="camera" autoplay playsinline muted></video>
+      <div class="frame"></div>
+    </div>
+    <button class="btn" id="start">Enable Mirror Camera</button>
+    <div class="hint" id="hint">Camera permission is needed to see yourself in the mirror.</div>
+    <div class="verdict" id="verdict">
+      <div class="verdict-intro">Pathiyaaa evlo azhagaa irukahh 🥳 ipdi la feel panalaamaaa<br>
+      En panguuu epome alaguu thann ￼</div>
+      <div class="verdict-divider"></div>
+      <b>MIRROR VERDICT</b>
+      Panguuu romba azhagaa irukanga<br>
+      Case closed<br>
+      No arguements accepted 😌<br>
+      Panguuu is butterfly panguuu 🦋<br>
+      Butterfly ku avanga azhagey theriyathu butt sema azhaguu than😇
+    </div>
+  </section>
+</div>
+<script>
+const messageScreen=document.getElementById('messageScreen');
+const mirrorScreen=document.getElementById('mirrorScreen');
+const toMirror=document.getElementById('toMirror');
+const start=document.getElementById('start');
+const camera=document.getElementById('camera');
+const hint=document.getElementById('hint');
+const verdict=document.getElementById('verdict');
+let stream=null;
+
+toMirror.addEventListener('click',()=>{
+  messageScreen.classList.remove('active');
+  mirrorScreen.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+start.addEventListener('click',async()=>{
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+    camera.srcObject=stream;
+    hint.textContent='That’s you, Panguuuu. 🪞';
+    start.textContent='Mirror is ON ✨';
+    start.disabled=true;
+    setTimeout(()=>verdict.classList.add('show'),2200);
+  }catch(err){
+    hint.textContent='Camera access was not allowed. Please allow camera access and try again.';
+  }
+});
+
+window.addEventListener('pagehide',()=>{
+  if(stream) stream.getTracks().forEach(track=>track.stop());
+});
+</script>
+</body>
+</html>
